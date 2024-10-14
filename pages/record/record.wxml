@@ -1,0 +1,53 @@
+<!--pages/record/record.wxml-->
+<!-- <view class="head"> -->
+<!-- 授权 -->
+<view class="show-user-box">
+	<view class="userinfo">
+		<!-- <button class="userinfo-btn" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 授权 </button> -->
+		<block >
+			<image class="userinfo-avatar" src="{{userinfo.avatarUrl}}" mode="cover"></image>
+			<text class="userinfo-nickname">欢迎你，{{userinfo.nickName}}！</text>
+		</block>
+	</view>
+</view>
+<!-- <view class="avatar">
+		<open-data type="userAvatar"></open-data>
+	</view> -->
+<!-- </view> -->
+<view class="content">
+	<view class="list-title">消费记录</view>
+	<view class="list-item" wx:for="{{list}}" wx:key="id">
+		<view class="list-item-l">
+        <view>消费 {{item.paytime}}</view>
+        <view wx:for="{{item.order}}" wx:for-item="aa" >
+          <text space="ensp">  {{aa.name}}</text>
+        </view>
+			<!-- <view class="list-item-time">{{item.paytime}}</view> -->
+		</view>
+
+    
+		<view class="list-item-r">
+        <text space="ensp">   {{priceFormat(item.price)}}</text>
+        <view wx:for="{{item.order}}" wx:for-item="aa" >
+          <text space="ensp">  {{aa.number}}  /{{priceFormat(aa.price)}}</text>
+        </view>
+		</view>
+
+    <view style="border-bottom: 1px solid black;"></view>
+    <view></view>
+	</view>
+</view>
+
+<wxs module="priceFormat">
+	module.exports = function(price) {
+		return '¥ ' + parseFloat(price)
+	}
+</wxs>
+
+
+
+<wxs module="timeFormat">
+	module.exports = function(price) {
+		return new Date(price)
+	}
+</wxs>
